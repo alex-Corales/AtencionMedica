@@ -1,0 +1,17 @@
+extends ../layout
+
+block content
+    .login-container
+        h1 Iniciar Sesión
+        form(action="/auth/login" method="POST")
+            .form-group
+                label(for="username") Usuario:
+                input(type="text" name="username" id="username" required)
+            .form-group
+                label(for="password") Contraseña:
+                input(type="password" name="password" id="password" required)
+            .form-group
+                button(type="submit") Iniciar Sesión
+        if error
+            p.error(style="color:red;")= error
+

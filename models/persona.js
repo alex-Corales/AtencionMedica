@@ -11,6 +11,7 @@ export class PersonaModel {
         return personas
     }
 
+    // Insertar una persona en la base de datos
     static async insertarPersona({ persona }) {
         const [idPersona] = await connecion.query('INSERT INTO personas SET ?', [persona])
         return idPersona
