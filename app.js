@@ -37,7 +37,7 @@ export const createApp = ({ personaModel, usuarioModel }) => {
     });
 
     // Rutas
-    app.use('/auth', crearUsarioRouter({ usuarioModel }));
+    app.use('/usuarios', crearUsarioRouter({ usuarioModel }));
     app.use('/personas', createPersonaRouter({ personaModel }));
 
     // Servidor
