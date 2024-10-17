@@ -4,7 +4,6 @@ html
         title Atención Médica
         link(rel="stylesheet" href="/css/agenda.css")
     body
-        // Barra de Navegación
         nav.navbar
             ul
                 li
@@ -14,18 +13,14 @@ html
                 li
                     a(href="/configuracion") Configuración
                 li
-                    a(href="/logout") Cerrar Sesión
+                    a(href="/usuario/logout") Cerrar Sesión
 
-        // Selección de Fecha
         form(action="/agenda/fecha" method="POST")
             .fecha-container
-                label(for="fecha") Fecha:
-                input(type="date" name="fecha" id="fecha" value=fechaSeleccionada) 
+                label(for="fecha") Fecha:  
+                input(type="date" name="fecha" id="fecha" value=fechaSeleccionada)
                 button(type="submit") Buscar Turnos
 
-
-
-        // Tabla de Turnos
         table.turnos
             thead
                 tr
@@ -38,12 +33,11 @@ html
                 each turno in turnos
                     tr
                         td #{turno.hora}
-                        td #{turno.paciente}
+                        td #{turno.nombre}
                         td #{turno.motivo}
                         td #{turno.estado}
                         td
-                            button Iniciar Atención
+                            button Iniciar Consulta
 
-        // Incluir el archivo JS justo antes del cierre del body
         script(src="/js/main.js")
     </body>

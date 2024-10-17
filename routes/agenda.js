@@ -7,8 +7,6 @@ export const crearAgendaRouter = ({ agendaModel }) => {
     const agendaController = new AgendaController({ agendaModel });
 
     agendaRouter.get('/', agendaController.obtenerAgendaCompleta);
-
-    // POST para cuando se selecciona una nueva fecha
     agendaRouter.post('/fecha', agendaController.obtenerTurnosPorFecha);
 
 
