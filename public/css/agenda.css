@@ -1,0 +1,126 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
+
+/* Barra de Navegación */
+.navbar {
+    background-color: #007bff;
+    padding: 1rem;
+    text-align: center;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar ul li {
+    margin: 0 1rem;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.navbar ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Contenedor de la fecha */
+.fecha-container {
+    display: flex;
+    flex-direction: row; /* Cambiado a 'row' para disposición horizontal */
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.fecha-container label {
+    font-size: 1.2rem;
+    color: #333;
+    margin-right: 1rem; /* Espacio entre el label y el input */
+}
+
+.fecha-container input[type="date"] {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    margin-right: 1rem; /* Espacio entre el input y el botón */
+}
+
+.fecha-container input[type="date"]:hover {
+    border-color: #007bff;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+}
+
+.fecha-container input[type="date"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+}
+
+/* Botón de Buscar */
+.fecha-container button {
+    padding: 0.75rem 1.5rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.fecha-container button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Estilos para la tabla de turnos */
+table.turnos {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table.turnos th, table.turnos td {
+    padding: 1rem;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+table.turnos th {
+    background-color: #f0f0f0;
+}
+
+table.turnos tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}

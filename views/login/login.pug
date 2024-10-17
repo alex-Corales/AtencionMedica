@@ -1,9 +1,12 @@
-extends ../layout
-
-block content
+doctype html 
+html 
+    head
+        title Atencion Medica 
+        link(rel="stylesheet" href="/css/login.css")
+body 
     .login-container
         h1 Iniciar Sesión
-        form(action="/auth/login" method="POST")
+        form(action="/usuario/login" method="POST")
             .form-group
                 label(for="mail") Correo:
                 input(type="text" name="mail" id="mail" required)

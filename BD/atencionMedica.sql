@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-10-2024 a las 23:01:50
+-- Tiempo de generación: 14-10-2024 a las 18:43:49
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -198,6 +198,34 @@ CREATE TABLE `personas` (
   `direccion` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `personas`
+--
+
+INSERT INTO `personas` (`id_persona`, `documento`, `nombre`, `apellido`, `fecha_nacimiento`, `email`, `telefono`, `direccion`) VALUES
+(1, 32456456, 'Juan', 'Perez', '1985-05-12', 'juan.perez@example.com', 1167894567, 'Calle Falsa 123'),
+(2, 35678945, 'Maria', 'Lopez', '1990-08-25', 'maria.lopez@example.com', 1178945632, 'Avenida Siempre Viva 456'),
+(3, 28765432, 'Carlos', 'Gomez', '1978-11-03', 'carlos.gomez@example.com', 1145689321, 'Boulevard 9 de Julio 789'),
+(4, 37568954, 'Lucia', 'Diaz', '1995-07-22', 'lucia.diaz@example.com', 1186543210, 'Calle Corrientes 250'),
+(5, 31567982, 'Jorge', 'Martinez', '1982-02-15', 'jorge.martinez@example.com', 1167321945, 'Calle San Martin 320'),
+(6, 35468712, 'Sofia', 'Fernandez', '1993-12-10', 'sofia.fernandez@example.com', 1198765432, 'Av. Belgrano 670'),
+(7, 29876543, 'Pablo', 'Sanchez', '1989-05-29', 'pablo.sanchez@example.com', 1167891234, 'Calle Moreno 850'),
+(8, 36789452, 'Ana', 'Rodriguez', '1991-09-17', 'ana.rodriguez@example.com', 1167123456, 'Calle Las Heras 450'),
+(9, 31546897, 'Diego', 'Gonzalez', '1987-03-02', 'diego.gonzalez@example.com', 1145789632, 'Avenida Callao 350'),
+(10, 32478569, 'Laura', 'Moreno', '1984-06-23', 'laura.moreno@example.com', 1167543210, 'Calle Lavalle 300'),
+(11, 34879654, 'Fernando', 'Ruiz', '1992-01-16', 'fernando.ruiz@example.com', 1156789432, 'Calle Mitre 430'),
+(12, 37895432, 'Gabriela', 'Silva', '1990-10-18', 'gabriela.silva@example.com', 1198763214, 'Calle Tucuman 290'),
+(13, 31256789, 'Marcos', 'Cabrera', '1986-08-14', 'marcos.cabrera@example.com', 1167896543, 'Calle Moreno 560'),
+(14, 36457823, 'Natalia', 'Torres', '1988-11-05', 'natalia.torres@example.com', 1178943210, 'Av. Rivadavia 780'),
+(15, 30246789, 'Lucas', 'Ramirez', '1991-04-21', 'lucas.ramirez@example.com', 1167548932, 'Calle Caseros 590'),
+(16, 31897654, 'Julieta', 'Acosta', '1994-12-19', 'julieta.acosta@example.com', 1167892145, 'Calle Independencia 210'),
+(17, 37985412, 'Martin', 'Villalba', '1983-07-28', 'martin.villalba@example.com', 1178932145, 'Calle Entre Rios 620'),
+(18, 32784512, 'Florencia', 'Castro', '1989-03-13', 'florencia.castro@example.com', 1167892143, 'Calle Luro 340'),
+(19, 31546789, 'Gustavo', 'Iglesias', '1985-11-11', 'gustavo.iglesias@example.com', 1156789432, 'Calle Cordoba 370'),
+(20, 34678912, 'Patricia', 'Garcia', '1992-05-04', 'patricia.garcia@example.com', 1198765432, 'Calle Santa Fe 680'),
+(21, 42125797, 'Alex', 'Corales', '2000-01-11', 'alexcorales21@gmail.com', 2147483647, 'Barrio serranias puntanas mnz 171 casa 18'),
+(22, 42125791, 'Alex', 'Corales', '2000-01-11', 'alexcorales2@gmail.com', 2147483647, 'Barrio serranias puntanas mnz 171 casa 18');
+
 -- --------------------------------------------------------
 
 --
@@ -249,6 +277,13 @@ CREATE TABLE `usuarios` (
   `email` text DEFAULT NULL,
   `password` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id_usuario`, `email`, `password`) VALUES
+(1, 'alexcorales21@gmail.com', '110100');
 
 --
 -- Índices para tablas volcadas
@@ -457,6 +492,12 @@ ALTER TABLE `pacientes`
   MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `personas`
+--
+ALTER TABLE `personas`
+  MODIFY `id_persona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
 -- AUTO_INCREMENT de la tabla `profesionales`
 --
 ALTER TABLE `profesionales`
@@ -478,7 +519,7 @@ ALTER TABLE `turnos`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas

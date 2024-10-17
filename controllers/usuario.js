@@ -6,11 +6,12 @@ export class UsuarioController {
     login = async (req, res) => {
         const { mail, password } = req.body
         const [user] = await this.usuarioModel.obtenerUsuarioContraseña({ mail, password })
-        
+
         if(user && user.email === mail && user.password === password){
             req.session.loggedIn = true
             req.session.username = mail
-            return res.redirect('/usuarios/dashboard')
+            req.session.userID = user.id_usuario
+            return res.redirect('/usuario/dashboard')
         } else {
             res.render('login/login', { error: 'Usuario o contraseña incorrectos' })
         }
@@ -18,7 +19,7 @@ export class UsuarioController {
 
     dashboard = (req, res) => {
         if (req.session.loggedIn) {
-            res.render('index', { username: req.session.username })
+            res.redirect('/agenda')
         } else {
             res.redirect('/')
         }

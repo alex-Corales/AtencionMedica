@@ -71,3 +71,26 @@ button:hover {
     color: red;
     text-align: center;
 }
+
+/* Estilos generales ya existentes */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Contenedor general de los turnos */
+.container-turnos {
+    width: 100%;
+    max-width: 600px; /* Ajusta según el tamaño que desees */
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
