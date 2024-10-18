@@ -12,7 +12,7 @@ export class UsuarioModel {
     }
 
     static async obtenerIdProfesionalAsociadoUsuario(id_usuario){
-        const [usuario] = await connecion.query(`SELECT id_profesional 
+        const [usuario] = await connecion.query(`SELECT id_profesional, id_persona 
                                                 FROM usuarios
                                                 INNER JOIN profesionales ON profesionales.id_usuario = usuarios.id_usuario
                                                 WHERE usuarios.id_usuario = ?`, [id_usuario]);
