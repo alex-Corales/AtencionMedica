@@ -5,7 +5,7 @@ export class AgendaController {
 
     obtenerAgendaCompleta = async (req, res) => {
         try {
-            const id_profesional = req.session.userID;
+            const id_profesional = req.session.profesionalID;
             const fechaSeleccionada = new Date().toISOString().split('T')[0];
 
             const turnos = await this.agendaModel.obtenerTurnosPorFecha(fechaSeleccionada, id_profesional);
