@@ -19,10 +19,8 @@ html
             .fecha-container
                 label(for="fecha") Fecha:  
                 input(type="date" name="fecha" id="fecha" value=fechaSeleccionada)
-                button(type="submit") Buscar Turnos
-
-        form(action="/consulta" method="POST")
-            table.turnos
+                button(type="submit") Buscar Turnos 
+        table.turnos
                 thead
                     tr
                         th Hora
@@ -38,7 +36,10 @@ html
                             td #{turno.motivo}
                             td #{turno.estado}
                             td
-                                button(type="submit") Iniciar Consulta
+                                form(action="/consulta" method="POST")
+                                    input(type="hidden" name="id_paciente" value=turno.id_paciente)
+                                    input(type="hidden" name="id_turno" value=turno.id_turno)
+                                    button(type="submit") Iniciar Consulta    
 
         script(src="/js/main.js")
     </body>

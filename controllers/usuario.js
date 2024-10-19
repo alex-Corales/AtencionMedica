@@ -13,7 +13,6 @@ export class UsuarioController {
                 req.session.username = mail;
                 req.session.userID = user.id_usuario;
                 const [auxUser] = await this.usuarioModel.obtenerIdProfesionalAsociadoUsuario(req.session.userID);
-                req.session.personaID = auxUser.id_persona;
                 req.session.profesionalID = auxUser.id_profesional;
                 return res.redirect('/usuario/dashboard')
             } else {
