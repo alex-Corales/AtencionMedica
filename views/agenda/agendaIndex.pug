@@ -2,8 +2,31 @@ doctype html
 html
     head
         title Atención Médica
-        // Incluye Bootstrap desde el CDN
         link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+        style.
+            body {
+                background-color: #f7f8fa;
+                font-family: 'Roboto', sans-serif;
+            }
+            nav {
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+            table {
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+                overflow: hidden;
+            }
+            table th, table td {
+                text-align: center;
+            }
+            button.btn-primary {
+                background-color: #007bff;
+                border: none;
+                transition: background-color 0.3s ease;
+            }
+            button.btn-primary:hover {
+                background-color: #0056b3;
+            }
     body
         nav.navbar.navbar-expand-lg.navbar-light.bg-light
             .container
@@ -57,5 +80,3 @@ html
                                         button.btn.btn-success(type="submit") Iniciar Consulta
                                 else
                                     button.btn.btn-secondary(type="submit" disabled) Iniciar Consulta
-
-

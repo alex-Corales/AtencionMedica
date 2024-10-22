@@ -1,20 +1,49 @@
-doctype html 
-html 
+doctype html
+html
     head
         title Atencion Medica 
-        link(rel="stylesheet" href="/css/login.css")
-body 
-    .login-container
-        h1 Iniciar Sesión
-        form(action="/usuario/login" method="POST")
-            .form-group
-                label(for="mail") Correo:
-                input(type="text" name="mail" id="mail" required)
-            .form-group
-                label(for="password") Contraseña:
-                input(type="password" name="password" id="password" required)
-            .form-group
-                button(type="submit") Iniciar Sesión
-        if error
-            p.error(style="color:red;")= error
-
+        link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+        style.
+            body {
+                background-color: #f7f8fa;
+                font-family: 'Roboto', sans-serif;
+            }
+            .card {
+                border-radius: 8px;
+                border: none;
+                max-width: 600px;
+            }
+            h1 {
+                font-size: 2.5rem;
+            }
+            input {
+                font-size: 1.2rem;
+                padding: 1rem;
+            }
+            button {
+                font-size: 1.2rem;
+                padding: 0.8rem;
+                background-color: #007bff;
+                border: none;
+                transition: background-color 0.3s ease;
+            }
+            button:hover {
+                background-color: #0056b3;
+            }
+            .form-group label {
+                font-size: 1.1rem;
+            }
+    body 
+        .container.d-flex.justify-content-center.align-items-center.min-vh-100
+            .card.p-5.shadow-sm
+                h1.text-center.mb-4 Iniciar Sesión
+                form(action="/usuario/login" method="POST")
+                    .form-group
+                        label(for="mail") Correo:
+                        input.form-control(type="email" name="mail" id="mail" required)
+                    .form-group
+                        label(for="password") Contraseña:
+                        input.form-control(type="password" name="password" id="password" required)
+                    button.btn.btn-primary.btn-block(type="submit") Iniciar Sesión
+                if error
+                    p.text-danger.text-center.mt-3= error
