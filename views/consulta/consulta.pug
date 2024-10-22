@@ -1,0 +1,49 @@
+html
+  head
+    title Tarjeta con Tabla
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
+  body
+    .container.mt-5 
+      .card
+        .card-body
+          .row
+            .col-md-6
+              h4 Datos Del Paciente
+              dl.row
+                dt.col-sm-4 Nombre:
+                dd.col-sm-8 #{paciente.nombre}
+                dt.col-sm-4 Apellido:
+                dd.col-sm-8 #{paciente.apellido}
+                dt.col-sm-4 Fecha de Nacimiento:
+                dd.col-sm-8 #{paciente.fecha_nacimiento.toISOString().split('T')[0]}
+                dt.col-sm-4 Documento:
+                dd.col-sm-8 #{paciente.documento}
+            .col-md-6
+              dl.row
+                dt.col-sm-4 Género:
+                dd.col-sm-8 #{paciente.genero}
+                dt.col-sm-4 Estado:
+                dd.col-sm-8 #{paciente.estado}
+                dt.col-sm-4 Motivo:
+                dd.col-sm-8 #{paciente.motivo.replace(/\r?\n/g, ' ')}
+          .row.mt-4
+            .col-md-12
+                h4 Historias Clinicas Pasadas
+                table.table
+                    thead
+                    tr
+                        th(scope='col') Medico
+                        th(scope='col') Fecha
+                        th(scope='col') Motivo Consulta
+                        th(scope='col') Descripcion Diagnosticos
+                        th(scope='col') Tipos Diagnosticos
+                    tbody
+                    each hc in historiaClinica
+                        tr
+                            td #{hc.apellido} #{hc.nombre}
+                            td #{hc.fecha.toISOString().split('T')[0]}
+                            td #{hc.motivo_consulta}
+                            td #{hc.descripcion_diagnosticos}
+                            td #{hc.tipos_diagnosticos}
+                    tfoot
+                        td Button

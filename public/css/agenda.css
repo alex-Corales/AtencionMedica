@@ -38,7 +38,8 @@ body {
 /* Contenedor de la fecha */
 .fecha-container {
     display: flex;
-    flex-direction: row; /* Cambiado a 'row' para disposición horizontal */
+    flex-direction: row;
+    /* Cambiado a 'row' para disposición horizontal */
     align-items: center;
     justify-content: center;
     margin: 2rem 0;
@@ -47,7 +48,8 @@ body {
 .fecha-container label {
     font-size: 1.2rem;
     color: #333;
-    margin-right: 1rem; /* Espacio entre el label y el input */
+    margin-right: 1rem;
+    /* Espacio entre el label y el input */
 }
 
 .fecha-container input[type="date"] {
@@ -58,7 +60,8 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     outline: none;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    margin-right: 1rem; /* Espacio entre el input y el botón */
+    margin-right: 1rem;
+    /* Espacio entre el input y el botón */
 }
 
 .fecha-container input[type="date"]:hover {
@@ -98,7 +101,8 @@ table.turnos {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-table.turnos th, table.turnos td {
+table.turnos th,
+table.turnos td {
     padding: 1rem;
     border: 1px solid #ccc;
     text-align: left;
@@ -123,4 +127,10 @@ button {
 
 button:hover {
     background-color: #218838;
+}
+
+button:disabled {
+    background-color: grey;
+    color: white;
+    cursor: not-allowed;
 }

@@ -7,15 +7,16 @@ export class ConsultaController {
         const {id_paciente, id_turno} = req.body;
         const fecha = '2024-10-19'
         const consulta = await this.consultaModel.crearConsulta(id_paciente, id_turno, fecha);
-        console.log(consulta);
-        res.json(consulta);
+        const actuzalizacionEstado = await this.consultaModel.actualizarEstadoTurno(id_turno);
+        res.redirect(`/consulta?id_paciente=${id_paciente}`);
     }
 
     mostrarDatosConsulta = async (req, res) => {
-        const { id_paciente, id_turno } = req.body;
+        const { id_paciente } = req.query;
         const paciente = await this.consultaModel.obtenerDatosPaciente(id_paciente);
-        console.log(paciente);
-        res.json(paciente);
+        const historiaClinica = await this.consultaModel.obtenerHistoriaClinicaPaciente(id_paciente);
+        console.log(historiaClinica)
+        res.render('consulta/consulta', { paciente, historiaClinica });
     }
 
 }

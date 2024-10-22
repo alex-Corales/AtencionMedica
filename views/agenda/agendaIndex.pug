@@ -36,10 +36,13 @@ html
                             td #{turno.motivo}
                             td #{turno.estado}
                             td
-                                form(action="/consulta" method="POST")
-                                    input(type="hidden" name="id_paciente" value=turno.id_paciente)
-                                    input(type="hidden" name="id_turno" value=turno.id_turno)
-                                    button(type="submit") Iniciar Consulta    
-
+                                if turno.estado !== 'Atendido'
+                                    form(action="/consulta" method="POST")
+                                        input(type="hidden" name="id_paciente" value=turno.id_paciente)
+                                        input(type="hidden" name="id_turno" value=turno.id_turno)
+                                        button(type="submit") Iniciar Consulta
+                                else
+                                    button(type="submit" disabled) Iniciar Consulta    
+                                    
         script(src="/js/main.js")
     </body>
