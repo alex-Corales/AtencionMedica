@@ -2,26 +2,40 @@ doctype html
 html
     head
         title Atención Médica
-        link(rel="stylesheet" href="/css/agenda.css")
+        // Incluye Bootstrap desde el CDN
+        link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
     body
-        nav.navbar
-            ul
-                li
-                    a(href="/agenda") Agenda
-                li
-                    a(href="/pacientes") Pacientes
-                li
-                    a(href="/configuracion") Configuración
-                li
-                    a(href="/usuario/logout") Cerrar Sesión
+        nav.navbar.navbar-expand-lg.navbar-light.bg-light
+            .container
+                a.navbar-brand(href="/agenda") Atención Médica
 
-        form(action="/agenda/fecha" method="POST")
-            .fecha-container
-                label(for="fecha") Fecha:  
-                input(type="date" name="fecha" id="fecha" value=fechaSeleccionada)
-                button(type="submit") Buscar Turnos 
-        table.turnos
-                thead
+                button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation")
+                    span.navbar-toggler-icon
+
+                .collapse.navbar-collapse#navbarNav
+                    ul.navbar-nav.mx-auto
+                        li.nav-item
+                            a.nav-link(href="/agenda") Agenda
+                        li.nav-item
+                            a.nav-link(href="/pacientes") Pacientes
+                        li.nav-item
+                            a.nav-link(href="/configuracion") Configuración
+
+                    ul.navbar-nav.ml-auto
+                        li.nav-item
+                            a.nav-link(href="/usuario/logout") Cerrar Sesión
+
+        .container.mt-4
+            .d-flex.justify-content-center
+                form(action="/agenda/fecha" method="POST" class="form-inline")
+                    .form-group.mb-2
+                        label(for="fecha" class="mr-2") Fecha:
+                        input.form-control(type="date" name="fecha" id="fecha" value=fechaSeleccionada)
+                    button.btn.btn-primary.mb-2.ml-2(type="submit") Buscar Turnos
+
+        .container.mt-4
+            table.table.table-striped
+                thead.thead-dark
                     tr
                         th Hora
                         th Paciente
@@ -40,9 +54,8 @@ html
                                     form(action="/consulta" method="POST")
                                         input(type="hidden" name="id_paciente" value=turno.id_paciente)
                                         input(type="hidden" name="id_turno" value=turno.id_turno)
-                                        button(type="submit") Iniciar Consulta
+                                        button.btn.btn-success(type="submit") Iniciar Consulta
                                 else
-                                    button(type="submit" disabled) Iniciar Consulta    
-                                    
-        script(src="/js/main.js")
-    </body>
+                                    button.btn.btn-secondary(type="submit" disabled) Iniciar Consulta
+
+
