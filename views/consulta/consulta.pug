@@ -1,10 +1,11 @@
 html
   head
     title Tarjeta con Tabla
-    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
+    link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css')
   body
-    .container.mt-5 
-      .card
+    //.container-fluid.mt-5
+    .container.mt-5(style="max-width: 90%;")
+      .card.w-100
         .card-body
           .row
             .col-md-6
@@ -26,24 +27,48 @@ html
                 dd.col-sm-8 #{paciente.estado}
                 dt.col-sm-4 Motivo:
                 dd.col-sm-8 #{paciente.motivo.replace(/\r?\n/g, ' ')}
-          .row.mt-4
-            .col-md-12
-                h4 Historias Clinicas Pasadas
-                table.table
-                    thead
-                    tr
-                        th(scope='col') Medico
-                        th(scope='col') Fecha
-                        th(scope='col') Motivo Consulta
-                        th(scope='col') Descripcion Diagnosticos
-                        th(scope='col') Tipos Diagnosticos
-                    tbody
-                    each hc in historiaClinica
-                        tr
-                            td #{hc.apellido} #{hc.nombre}
-                            td #{hc.fecha.toISOString().split('T')[0]}
-                            td #{hc.motivo_consulta}
-                            td #{hc.descripcion_diagnosticos}
-                            td #{hc.tipos_diagnosticos}
-                    tfoot
-                        td Button
+          
+          h5.mb-4 Alergias Importantes
+          if alergias.length !== 0 
+            each alergia in alergias
+              if alergia.importancia === "alta" || alergia.importancia === "Alta"
+                p 
+                  span(style="color: red;") [!Alerta!] 
+                  b #{alergia.nombre} 
+                    span(style="color: green;") (importancia: #{alergia.importancia})
+          else 
+            p El paciente no tiene Alergias importantes
+          hr
+          
+          h4.mt-4 Evoluciones de la Antencion Actual
+          .mb-3
+            textarea.form-control(rows='5')
+          hr
+
+          h4.mt-4 Diagnosticos de la Atencion Actual 
+          h5.mt-4 Diagnosticos ingresado 
+          table.table.table-sm
+            thead
+              tr 
+                th(scope='col') N°
+                th(scope='col') Descripcion 
+                th(scope='col') Estado (Tipo)
+            
+          h5.mt-4 Agregar un nuevo diagnostico
+          .row
+            .col 
+              input.form-control(type='text' placeholder='Default input' aria-label='default input example')
+            .col
+              select.form-select(aria-label='Default select example')
+                option(selected='') Estado
+                option(value='1') Preliminar
+                option(value='2') Two
+                option(value='3') Three
+
+          button.btn.btn-secondary.mt-4(type='button') Agregar Diagnostico
+    
+  script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js")
+
+
+
+          

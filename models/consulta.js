@@ -30,7 +30,7 @@ export class ConsultaModel {
         return update;
     }
 
-    static async obtenerHistoriaClinicaPaciente(id_paciente){
+    static async obtenerHistoriasClinicasPaciente(id_paciente){
         const [historiaClinica] = await connection.query(`SELECT consultas.fecha, 
                                                         personas.nombre, 
                                                         personas.apellido, 
@@ -52,6 +52,15 @@ export class ConsultaModel {
                                                         GROUP BY consultas.fecha, personas.nombre, personas.apellido, historias_clinicas.motivo_consulta, 
                                                         d.descripcion_diagnosticos, d.tipos_diagnosticos;`, [id_paciente]);
         return historiaClinica;
+    }
+
+    static async obtenerAlergiasPaciente(id_paciente){
+        const [alergias] = await connection.query(`SELECT alergias.nombre, alergias.fecha_desde, alergias.fecha_hasta, alergias.importancia
+                                                    FROM consultas 
+                                                    INNER JOIN historias_clinicas ON historias_clinicas.id_consulta = consultas.id_consulta
+                                                    LEFT JOIN alergias ON alergias.id_historia_clinica = historias_clinicas.id_historia_clinica
+                                                    WHERE consultas.id_paciente = ?`, [id_paciente]);
+        return alergias;
     }
 
 }

@@ -77,6 +77,6 @@ html
                                     form(action="/consulta" method="POST")
                                         input(type="hidden" name="id_paciente" value=turno.id_paciente)
                                         input(type="hidden" name="id_turno" value=turno.id_turno)
-                                        button.btn.btn-success(type="submit") Iniciar Consulta
+                                        button.btn.btn-primary(type="submit") Iniciar Consulta
                                 else
-                                    button.btn.btn-secondary(type="submit" disabled) Iniciar Consulta
+                                    button.btn.btn-primary(type="submit" disabled) Iniciar Consulta
