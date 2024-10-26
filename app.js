@@ -17,6 +17,7 @@ export const createApp = ({ usuarioModel, agendaModel, consultaModel, profesiona
     const __dirname = path.dirname(__filename);;
 
     app.use(express.static(path.join(__dirname, 'public')));
+    app.use(express.static('public'));
 
     // Confirar pug
     app.set('view engine', 'pug');

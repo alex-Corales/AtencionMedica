@@ -28,6 +28,7 @@ export class ConsultaController {
 
             const alergias = await this.consultaModel.obtenerAlergiasPaciente(id_paciente);
             
+            console.log(alergias);
 
             res.render('consulta/consulta', { paciente, historiaClinica, id_profesional, alergias });
         }catch(error) {
