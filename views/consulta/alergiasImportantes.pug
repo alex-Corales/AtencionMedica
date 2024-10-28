@@ -1,0 +1,11 @@
+h5.mb-4 Alergias Importantes
+if alergias.length !== 0 
+  each alergia in alergias
+    if alergia.importancia === "alta" || alergia.importancia === "Alta"
+      p 
+        span(style="color: red;") [!Alerta!] 
+        b #{alergia.nombre} 
+        span(style="color: green;") (importancia: #{alergia.importancia})
+else 
+  p El paciente no tiene Alergias importantes
+hr

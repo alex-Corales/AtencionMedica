@@ -1,0 +1,23 @@
+h4.mt-4 Diagnósticos de la Atención Actual 
+h5.mt-4 Diagnósticos ingresados 
+table.table.table-sm(id="tablaDiagnosticos")
+  thead
+    tr 
+      th(scope='col') N°
+      th(scope='col') Descripción 
+      th(scope='col') Estado (Tipo)
+  tbody 
+
+h5.mt-4 Agregar un nuevo diagnóstico
+.row
+  .col 
+    input.form-control(type='text' id='inputDescripcion' placeholder='Ingrese la descripción' aria-label='Descripción')
+  .col
+    select.form-select(id='selectEstado' aria-label='Estado')
+      option(value='' selected) Estado
+      option(value='Preliminar') Preliminar
+      option(value='Definitivo') Definitivo
+      option(value='Observación') Observación
+
+button.btn.btn-secondary.mt-4(type='button' onClick="agregarFilaConsulta()") Agregar Diagnóstico
+hr

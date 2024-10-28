@@ -28,9 +28,10 @@ export class ConsultaController {
 
             const alergias = await this.consultaModel.obtenerAlergiasPaciente(id_paciente);
             
-            console.log(alergias);
+            //const antecedentesPatologicos = await this.consultaModel.obtenerAntecentesPatologicosPaciente(id_paciente, id_profesional);
+            const antecedentesPatologicos = [];
 
-            res.render('consulta/consulta', { paciente, historiaClinica, id_profesional, alergias });
+            res.render('consulta/consulta', { paciente, historiaClinica, id_profesional, alergias, antecedentesPatologicos });
         }catch(error) {
             console.error(error);
             res.status(500).send('Error al mostrar datos de la consulta');

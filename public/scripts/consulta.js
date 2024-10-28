@@ -1,6 +1,6 @@
 let contadorConsulta = 0;
 
-function agregarFila() {
+function agregarFilaConsulta() {
     const descripcion = document.getElementById('inputDescripcion').value;
     const estado = document.getElementById('selectEstado').value;
 

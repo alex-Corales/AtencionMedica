@@ -1,0 +1,20 @@
+.row
+  .col-md-6
+    h4 Datos Del Paciente
+    dl.row
+      dt.col-sm-4 Nombre:
+      dd.col-sm-8 #{paciente.nombre}
+      dt.col-sm-4 Apellido:
+      dd.col-sm-8 #{paciente.apellido}
+      dt.col-sm-4 Fecha de Nacimiento:
+      dd.col-sm-8 #{paciente.fecha_nacimiento.toISOString().split('T')[0]}
+      dt.col-sm-4 Documento:
+      dd.col-sm-8 #{paciente.documento}
+  .col-md-6
+    dl.row
+      dt.col-sm-4 Género:
+      dd.col-sm-8 #{paciente.genero}
+      dt.col-sm-4 Estado:
+      dd.col-sm-8 #{paciente.estado}
+      dt.col-sm-4 Motivo:
+      dd.col-sm-8 #{paciente.motivo.replace(/\r?\n/g, ' ')}

@@ -63,4 +63,15 @@ export class ConsultaModel {
         return alergias;
     }
 
+    /**
+     * 
+     * @param {number} id_paciente 
+     * @param {number} id_profesional 
+     * @returns {array} Un array de objetos
+     */
+    static async obtenerAntecentesPatologicosPaciente(id_paciente, id_profesional){
+        const [antecedentesPatologicos] = await connection.query(``);
+        return antecedentesPatologicos;
+    }
+
 }
