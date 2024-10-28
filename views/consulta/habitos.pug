@@ -1,0 +1,30 @@
+h4.mt-4 Habitos
+table.table.table-sm(id="tablaHabitos")
+  thead
+    tr 
+      th(scope='col') Descripcion
+      th(scope='col') Fecha desde
+      th(scope='col') Fecha hasta 
+  tbody 
+    each habito in habitos                
+      tr
+        td #{habito.descripcion}
+        td #{habito.fecha_desde.toISOString().split('T')[0]}
+        td #{habito.fecha_hasta.toISOString().split('T')[0]}
+
+strong Nota: Detalles completos solo visibles para hábitos registrados por usted.
+
+h5.mt-4 Agregar nuevo habito
+.row
+  .col 
+    input.form-control(type='text' id='inputDescripcionHabito' placeholder='Ingrese la descripcion' aria-label='Descripcion')
+.row.mt-2  
+  .col
+    label Fecha Desde
+    input.form-control(type="date" name="fechaDesde" id="fechaDesdeHabito" value=fechaSeleccionada)
+  .col  
+    label Fecha Hasta
+    input.form-control(type="date" name="fechaHasta" id="fechaHastaHabito" value=fechaSeleccionada)
+
+button.btn.btn-secondary.mt-4(type='button' onClick="agregarFilaHabito()") Agregar Habito
+hr

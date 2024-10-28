@@ -31,7 +31,9 @@ export class ConsultaController {
             //const antecedentesPatologicos = await this.consultaModel.obtenerAntecentesPatologicosPaciente(id_paciente, id_profesional);
             const antecedentesPatologicos = [];
 
-            res.render('consulta/consulta', { paciente, historiaClinica, id_profesional, alergias, antecedentesPatologicos });
+            const habitos = [];
+
+            res.render('consulta/consulta', { paciente, historiaClinica, id_profesional, alergias, antecedentesPatologicos, habitos });
         }catch(error) {
             console.error(error);
             res.status(500).send('Error al mostrar datos de la consulta');
