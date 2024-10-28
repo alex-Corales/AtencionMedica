@@ -1,13 +1,12 @@
 h4.mt-4 Antecedentes Patologicos
-table.table.table-sm(id="tablaAlergias")
+table.table.table-sm(id="tablaAntecedentes")
   thead
     tr 
-      th(scope='col') N°    
       th(scope='col') Descripcion
       th(scope='col') Fecha desde
       th(scope='col') Fecha hasta 
-  each antecedente in antecedentesPatologicos                
-    tbody 
+  tbody 
+    each antecedente in antecedentesPatologicos                
       tr
         td #{antecedente.descripcion}
         td #{antecedente.fecha_desde.toISOString().split('T')[0]}
@@ -15,14 +14,14 @@ table.table.table-sm(id="tablaAlergias")
 h5.mt-4 Agregar un nuevo antecedente patologico
 .row
   .col 
-    input.form-control(type='text' id='inputDescripcion' placeholder='Ingrese la descripcion' aria-label='Descripcion')
+    input.form-control(type='text' id='inputDescripcionAntecedente' placeholder='Ingrese la descripcion' aria-label='Descripcion')
 .row.mt-2  
   .col
     label Fecha Desde
-    input.form-control(type="date" name="fecha" id="fechaAlergia" value=fechaSeleccionada)
+    input.form-control(type="date" name="fechaDesde" id="fechaDesde" value=fechaSeleccionada)
   .col  
     label Fecha Hasta
-    input.form-control(type="date" name="fecha" id="fechaAlergia" value=fechaSeleccionada)
+    input.form-control(type="date" name="fechaHasta" id="fechaHasta" value=fechaSeleccionada)
 
 button.btn.btn-secondary.mt-4(type='button' onClick="agregarFilaAntecedentePatologico()") Agregar Antecedente Patologico
 hr
