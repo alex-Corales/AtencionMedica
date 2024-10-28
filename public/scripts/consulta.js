@@ -125,3 +125,33 @@ function agregarFilaHabito(){
     document.getElementById('fechaDesde').value = '';
     document.getElementById('fechaHasta').value = '';
 }
+
+function agregarFilaMedicamento(){
+    const nombreMedicamento = document.getElementById('inputNombreMedicamento').value;
+    const dosisMedicamento = document.getElementById('inputDosisMedicamento').value;
+    const frecuenciaMedicamento = document.getElementById('inputFrecuenciaMedicamento').value;
+
+    if (!nombreMedicamento || !dosisMedicamento || !frecuenciaMedicamento) {
+        alert('Tiene que llenar todos los campos');
+        return;
+    }
+
+    const fila = document.createElement('tr');
+
+    const columnaNombre = document.createElement('td');
+    columnaNombre.textContent = nombreMedicamento;
+    const columnaDosis = document.createElement('td');
+    columnaDosis.textContent = dosisMedicamento;
+    const columnaFrecuencia = document.createElement('td');
+    columnaFrecuencia.textContent = frecuenciaMedicamento;
+
+    fila.appendChild(columnaNombre);
+    fila.appendChild(columnaDosis);
+    fila.appendChild(columnaFrecuencia);
+
+    document.getElementById('tablaMedicamentos').querySelector('tbody').appendChild(fila);
+
+    document.getElementById('inputNombreMedicamento').value = '';
+    document.getElementById('inputDosisMedicamento').value = '';
+    document.getElementById('inputFrecuenciaMedicamento').value = '';
+}

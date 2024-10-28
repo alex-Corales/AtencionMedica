@@ -1,0 +1,27 @@
+h4.mt-4 Medicamentos
+table.table.table-sm(id="tablaMedicamentos")
+  thead
+    tr 
+      th(scope='col') Nombre
+      th(scope='col') Dosis
+      th(scope='col') Frecuencia 
+  tbody 
+    each medicamento in medicamentos                
+      tr
+        td #{medicamento.descripcion}
+        td #{medicamento.fecha_desde.toISOString().split('T')[0]}
+        td #{medicamento.fecha_hasta.toISOString().split('T')[0]}
+
+strong Nota: Los medicamentos registrados por otros profesionales son visibles pero no editables.
+
+h5.mt-4 Agregar un nuevo medicamento
+.row
+  .col 
+    input.form-control(type='text' id='inputNombreMedicamento' placeholder='Ingrese el nombre' aria-label='Nombre')
+  .col 
+    input.form-control(type='text' id='inputDosisMedicamento' placeholder='Ingrese la dosis' aria-label='Dosis')
+  .col 
+    input.form-control(type='text' id='inputFrecuenciaMedicamento' placeholder='Ingrese la frecuencia' aria-label='Frecuencia')
+
+button.btn.btn-secondary.mt-4(type='button' onClick="agregarFilaMedicamento()") Agregar Habito
+hr

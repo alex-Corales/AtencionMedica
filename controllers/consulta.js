@@ -33,7 +33,9 @@ export class ConsultaController {
 
             const habitos = [];
 
-            res.render('consulta/consulta', { paciente, historiaClinica, id_profesional, alergias, antecedentesPatologicos, habitos });
+            const medicamentos = [];
+
+            res.render('consulta/consulta', { paciente, historiaClinica, id_profesional, alergias, antecedentesPatologicos, habitos, medicamentos });
         }catch(error) {
             console.error(error);
             res.status(500).send('Error al mostrar datos de la consulta');
