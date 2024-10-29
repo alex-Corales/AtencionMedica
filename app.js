@@ -31,7 +31,8 @@ export const createApp = ({ usuarioModel, agendaModel, consultaModel, profesiona
         resave: false,
         saveUninitialized: true,
         cookie: { secure: false }  // Cambia a 'true' si usas HTTPS
-    }))
+    }));
+    app.use(express.json());
 
     // Pagina principal
     app.get('/', (req, res) => {

@@ -1,0 +1,29 @@
+.row.mt-4
+    .col-md-12
+        h4 Historias Clinicas Pasadas
+        table.table.table-sm
+                thead
+                tr
+                    th(scope='col') Medico
+                    th(scope='col') Fecha
+                    th(scope='col') Motivo Consulta
+                    th(scope='col') Descripcion Diagnosticos
+                    th(scope='col') Tipos Diagnosticos
+                    th(scape='col') Ver Mas
+                tbody
+                each hc in historiaClinica
+                    tr
+                        td #{hc.apellido} #{hc.nombre}
+                        td #{hc.fecha.toISOString().split('T')[0]}
+                        td #{hc.motivo_consulta}
+                        td #{hc.descripcion_diagnosticos}
+                        td #{hc.tipos_diagnosticos}
+                        td
+                            if hc.id_profesional === id_profesional
+                                form(action="/" method="POST")
+                                input(type="hidden" name="id_historia_clinica" value=hc.id_historia_clinica)
+                                button.btn.btn-primary(type="submit") +
+                            else
+                                button.btn.btn-primary(type="submit" disabled) +
+        strong Nota: Los detalles completos de las atenciones están restringidos a los profesionales que las registraron.             
+        hr

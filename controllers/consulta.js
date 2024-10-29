@@ -27,7 +27,7 @@ export class ConsultaController {
             const historiaClinica = await this.consultaModel.obtenerHistoriasClinicasPaciente(id_paciente);
 
             const alergias = await this.consultaModel.obtenerAlergiasPaciente(id_paciente);
-            
+
             //const antecedentesPatologicos = await this.consultaModel.obtenerAntecentesPatologicosPaciente(id_paciente, id_profesional);
             const antecedentesPatologicos = [];
 
@@ -36,10 +36,21 @@ export class ConsultaController {
             const medicamentos = [];
 
             res.render('consulta/consulta', { paciente, historiaClinica, id_profesional, alergias, antecedentesPatologicos, habitos, medicamentos });
-        }catch(error) {
+        } catch (error) {
             console.error(error);
             res.status(500).send('Error al mostrar datos de la consulta');
         }
     }
+
+    finalizarConsulta = async (req, res) => {
+        try {
+            const { id_consulta, evolucion ,habitos, alergias, antecedentesPatologicos, medicamentos } = req.body;
+
+    
+        } catch (error) {
+            console.error("Error en finalizarConsulta:", error);
+            res.status(500).json({ success: false, message: 'Error al procesar la solicitud' });
+        }
+    };
 
 }

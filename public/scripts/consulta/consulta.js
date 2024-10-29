@@ -1,3 +1,5 @@
+let auxHabitos = [];
+
 function agregarFilaConsulta() {
     let contadorConsulta = 0;
 
@@ -119,11 +121,13 @@ function agregarFilaHabito(){
     fila.appendChild(columnaFechaDesde);
     fila.appendChild(columnaFechaHasta);
 
+    auxHabitos.push({ descripcionHabito, fechaDesde, fechaHasta });
+
     document.getElementById('tablaHabitos').querySelector('tbody').appendChild(fila);
 
-    document.getElementById('inputHabitos').value = '';
-    document.getElementById('fechaDesde').value = '';
-    document.getElementById('fechaHasta').value = '';
+    document.getElementById('inputDescripcionHabito').value = '';
+    document.getElementById('fechaDesdeHabito').value = '';
+    document.getElementById('fechaHastaHabito').value = '';
 }
 
 function agregarFilaMedicamento(){

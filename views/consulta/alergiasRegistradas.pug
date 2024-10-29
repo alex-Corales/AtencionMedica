@@ -11,6 +11,9 @@ table.table.table-sm(id="tablaAlergias")
         td #{alergia.nombre}
         td #{alergia.fecha_desde.toISOString().split('T')[0]}
         td #{alergia.importancia}
+
+strong Nota: Las alergias son visibles para todos los profesionales.
+
 h5.mt-4 Agregar una nueva alergia
 .row
   .col 
@@ -20,9 +23,9 @@ h5.mt-4 Agregar una nueva alergia
   .col
     select.form-select(id='selectImportancia' aria-label='Importancia')
       option(value='' selected) Importacia
-      option(value='Baja') Baja
-      option(value='Media') Media
+      option(value='Leve') Leve
+      option(value='Normal') Normal
       option(value='Alta') Alta
 
-button.btn.btn-secondary.mt-4(type='button' onClick="agregarFilaAlergia()") Agregar alergia
+button.btn.btn-primary.mt-4(type='button' onClick="agregarFilaAlergia()") Agregar alergia
 hr

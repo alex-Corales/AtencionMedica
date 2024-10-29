@@ -10,6 +10,7 @@ export const crearConsultaRouter = ({ consultaModel }) => {
 
     consultaRouter.post('/', consultaController.crearConsulta);
     consultaRouter.get('/', consultaController.mostrarDatosConsulta);
+    consultaRouter.post('/finalizarConsulta', consultaController.finalizarConsulta);
 
     return consultaRouter;
 

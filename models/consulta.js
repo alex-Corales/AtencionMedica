@@ -64,6 +64,8 @@ export class ConsultaModel {
     }
 
     /**
+     * Quiero buscar en la base de datos los antecedentes patologicos de un determinado paciente
+     * pero estos diagnosticos seran solo del profesional que los anoto
      * 
      * @param {number} id_paciente 
      * @param {number} id_profesional 
