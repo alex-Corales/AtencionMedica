@@ -1,61 +1,54 @@
 document.getElementById('finalizarConsulta').addEventListener('click', function () {
-    
-    let evolucion = "";
-    evolucion = document.getElementById('idEvoluciones').value;
+  let evolucion = document.getElementById('idEvoluciones').value;
 
-    let diagnosticos = [];
-    document.querySelectorAll('#tablaDiagnosticos tbody tr').forEach(row => {
-        let descripcion = row.cells[1].innerText;
-        let estado = row.cells[2].innerText;
-        diagnosticos.push({ descripcion, estado });
-    });
+  let datosPaciente = {
+    evolucion: evolucion,
+    diagnosticos: diagnosticos, 
+    alergias: alergias,
+    antecedentesPatologicos: antecedentesPatologicos,
+    habitos: habitos,
+    medicamentos: medicamentos
+  };
 
-    let alergias = [];
-    document.querySelectorAll('#tablaAlergias tbody tr');
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(datosPaciente)
+  };
 
-    let antecedentesPatologicos = [];
-
-    let habitos = [];
-    document.querySelectorAll('#tablaHabitos tbody tr').forEach(row => {
-      let descripcion = row.cells[0].innerText;
-      let fechaDesde = row.cells[1].innerText;
-      let fechaHasta = row.cells[2].innerText;
-      habitos.push({ descripcion, fechaDesde, fechaHasta });
-    });
-
-    console.log(auxHabitos);
-
-    let medicamentos = [];
-
-    let datosPaciente = {
-      id_consulta: "ID_DE_LA_CONSULTA",
-      evolucion: evolucion,
-      diagnosticos: diagnosticos,
-      alergias: alergias,
-      antecedentesPatologicos: antecedentesPatologicos,
-      habitos: habitos,
-      medicamentos: medicamentos
-    };
-
-    console.log("Datos enviados:", datosPaciente);
-
-    fetch('/consulta/finalizarConsulta', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(datosPaciente)
-    })
+  fetch('/consulta/finalizarConsulta', options)
     .then(response => response.json())
     .then(data => {
       if (data.success) {
         alert('Atención finalizada correctamente');
       } else {
-        alert('Hubo un problema al finalizar la atención');
+        if (data.errors) {
+          mostrarErroresDeValidacion(data.errors);
+        } else {
+          alert('Hubo un problema al finalizar la atención');
+        }
       }
     })
     .catch(error => {
       console.error('Error:', error);
       alert('Hubo un error al enviar los datos');
     });
-  });
+
+    async function mostrarErroresDeValidacion(errors) {
+      const erroresContainer = document.getElementById('erroresContainer');
+      erroresContainer.innerHTML = ''; // Limpia cualquier mensaje previo
+  
+      await errors.forEach((error) => {
+          const errorMessage = document.createElement('div');
+          errorMessage.className = 'alert alert-danger';
+          errorMessage.setAttribute('role', 'alert');
+          errorMessage.textContent = `Error en ${error.path.join('.')}: ${error.message}`;
+          erroresContainer.appendChild(errorMessage);
+      });
+  
+      erroresContainer.scrollIntoView({ behavior: 'smooth' });
+  }
+  
+});

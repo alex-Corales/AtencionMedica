@@ -1,5 +1,13 @@
-let auxHabitos = [];
+let diagnosticos = [];
+let alergias = [];
+let antecedentesPatologicos = [];
+let habitos = [];
+let medicamentos = [];
 
+/**
+ * Esta funcion es de los diagnosticos, se debe cambiar el nombre
+ * @returns {void}
+ */
 function agregarFilaConsulta() {
     let contadorConsulta = 0;
 
@@ -26,6 +34,8 @@ function agregarFilaConsulta() {
     fila.appendChild(columnaNumero);
     fila.appendChild(columnaDescripcion);
     fila.appendChild(columnaEstadoTipo);
+
+    diagnosticos.push({ descripcion, estado })
 
     document.getElementById('tablaDiagnosticos').querySelector('tbody').appendChild(fila);
 
@@ -59,6 +69,8 @@ function agregarFilaAlergia() {
     fila.appendChild(columnaFechaAlergia);
     fila.appendChild(columnaImportanciaAlergia);
 
+    alergias.push({ nombreAlergia, fechaAlergia, importanciaAlergia });
+
     document.getElementById('tablaAlergias').querySelector('tbody').appendChild(fila); 
 
     document.getElementById('inputNombreAlergia').value = '';
@@ -67,9 +79,9 @@ function agregarFilaAlergia() {
 }
 
 function agregarFilaAntecedentePatologico() {
-    const descripcionAntecedente = document.getElementById('inputDescripcionHabito').value;
-    const fechaDesde = document.getElementById('fechaDesde').value;
-    const fechaHasta = document.getElementById('fechaHasta').value;
+    const descripcionAntecedente = document.getElementById('inputDescripcionAntecedente').value;
+    const fechaDesde = document.getElementById('fechaDesdeAntecedente').value;
+    const fechaHasta = document.getElementById('fechaHastaAntecedente').value;
 
     if (!descripcionAntecedente || !fechaDesde || !fechaHasta) {
         alert('Tiene que llenar todos los campos');
@@ -88,6 +100,8 @@ function agregarFilaAntecedentePatologico() {
     filaAntecedentes.appendChild(columnaDescripcion);
     filaAntecedentes.appendChild(columnaFechaDesde);
     filaAntecedentes.appendChild(columnaFechaHasta);
+
+    antecedentesPatologicos.push({ descripcionAntecedente, fechaDesde, fechaHasta });  
 
     document.getElementById('tablaAntecedentes').querySelector('tbody').appendChild(filaAntecedentes);
 
@@ -121,7 +135,7 @@ function agregarFilaHabito(){
     fila.appendChild(columnaFechaDesde);
     fila.appendChild(columnaFechaHasta);
 
-    auxHabitos.push({ descripcionHabito, fechaDesde, fechaHasta });
+    habitos.push({ descripcionHabito, fechaDesde, fechaHasta });
 
     document.getElementById('tablaHabitos').querySelector('tbody').appendChild(fila);
 
@@ -152,6 +166,8 @@ function agregarFilaMedicamento(){
     fila.appendChild(columnaNombre);
     fila.appendChild(columnaDosis);
     fila.appendChild(columnaFrecuencia);
+
+    medicamentos.push({ nombreMedicamento, dosisMedicamento, frecuenciaMedicamento });
 
     document.getElementById('tablaMedicamentos').querySelector('tbody').appendChild(fila);
 

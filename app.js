@@ -29,7 +29,7 @@ export const createApp = ({ usuarioModel, agendaModel, consultaModel, profesiona
     app.use(session({
         secret: 'secret',
         resave: false,
-        saveUninitialized: true,
+        saveUninitialized: false,
         cookie: { secure: false }  // Cambia a 'true' si usas HTTPS
     }));
     app.use(express.json());

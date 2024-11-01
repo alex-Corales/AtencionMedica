@@ -1,3 +1,5 @@
+import { validateDatosPaciente } from '../schemas/consulta.js'
+
 export class ConsultaController {
     constructor({ consultaModel }) {
         this.consultaModel = consultaModel;
@@ -9,7 +11,9 @@ export class ConsultaController {
             const fecha = '2024-10-19'
             const consulta = await this.consultaModel.crearConsulta(id_paciente, id_turno, fecha);
             const id_consulta = consulta.insertId;
-            const actuzalizacionEstado = await this.consultaModel.actualizarEstadoTurno(id_turno);
+            req.session.consultaID = id_consulta;
+            req.session.pacienteID = id_paciente;
+            await this.consultaModel.actualizarEstadoTurno(id_turno);
             res.redirect(`/consulta?id_paciente=${id_paciente}&id_consulta=${id_consulta}`);
         } catch (error) {
             console.error(error);
@@ -28,14 +32,7 @@ export class ConsultaController {
 
             const alergias = await this.consultaModel.obtenerAlergiasPaciente(id_paciente);
 
-            //const antecedentesPatologicos = await this.consultaModel.obtenerAntecentesPatologicosPaciente(id_paciente, id_profesional);
-            const antecedentesPatologicos = [];
-
-            const habitos = [];
-
-            const medicamentos = [];
-
-            res.render('consulta/consulta', { paciente, historiaClinica, id_profesional, alergias, antecedentesPatologicos, habitos, medicamentos });
+            res.render('consulta/consulta', { paciente, historiaClinica, id_profesional, alergias });
         } catch (error) {
             console.error(error);
             res.status(500).send('Error al mostrar datos de la consulta');
@@ -44,13 +41,29 @@ export class ConsultaController {
 
     finalizarConsulta = async (req, res) => {
         try {
-            const { id_consulta, evolucion ,habitos, alergias, antecedentesPatologicos, medicamentos } = req.body;
-
+            const datosValidados = validateDatosPaciente(req.body);
     
+            if (!datosValidados.success) {
+                return res.status(400).json({
+                    success: false,
+                    errors: datosValidados.error.errors, 
+                });
+            }
+    
+            console.log("Datos validados:", datosValidados.data);
+    
+            res.status(200).json({
+                success: true,
+                message: 'Datos procesados correctamente',
+                data: datosValidados.data,
+            });
+
+
         } catch (error) {
             console.error("Error en finalizarConsulta:", error);
             res.status(500).json({ success: false, message: 'Error al procesar la solicitud' });
         }
     };
+    
 
 }

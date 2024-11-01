@@ -5,14 +5,7 @@ table.table.table-sm(id="tablaAlergias")
       th(scope='col') Nombre
       th(scope='col') Fecha desde 
       th(scope='col') Importancia
-  each alergia in alergias                
-    tbody 
-      tr
-        td #{alergia.nombre}
-        td #{alergia.fecha_desde.toISOString().split('T')[0]}
-        td #{alergia.importancia}
-
-strong Nota: Las alergias son visibles para todos los profesionales.
+  tbody                 
 
 h5.mt-4 Agregar una nueva alergia
 .row

@@ -6,13 +6,6 @@ table.table.table-sm(id="tablaHabitos")
       th(scope='col') Fecha desde
       th(scope='col') Fecha hasta 
   tbody 
-    each habito in habitos                
-      tr
-        td #{habito.descripcion}
-        td #{habito.fecha_desde.toISOString().split('T')[0]}
-        td #{habito.fecha_hasta.toISOString().split('T')[0]}
-
-strong Nota: Detalles completos solo visibles para hábitos registrados por usted.
 
 h5.mt-4 Agregar nuevo habito
 .row

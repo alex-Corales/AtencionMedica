@@ -6,13 +6,6 @@ table.table.table-sm(id="tablaAntecedentes")
       th(scope='col') Fecha desde
       th(scope='col') Fecha hasta 
   tbody 
-    each antecedente in antecedentesPatologicos                
-      tr
-        td #{antecedente.descripcion}
-        td #{antecedente.fecha_desde.toISOString().split('T')[0]}
-        td #{antecedente.fecha_hasta.toISOString().split('T')[0]}
-
-strong Nota: Solo se muestran detalles completos de antecedentes registrados por usted.
 
 h5.mt-4 Agregar un nuevo antecedente patologico
 .row
@@ -21,10 +14,10 @@ h5.mt-4 Agregar un nuevo antecedente patologico
 .row.mt-2  
   .col
     label Fecha Desde
-    input.form-control(type="date" name="fechaDesde" id="fechaDesde" value=fechaSeleccionada)
+    input.form-control(type="date" name="fechaDesde" id="fechaDesdeAntecedente" value=fechaSeleccionada)
   .col  
     label Fecha Hasta
-    input.form-control(type="date" name="fechaHasta" id="fechaHasta" value=fechaSeleccionada)
+    input.form-control(type="date" name="fechaHasta" id="fechaHastaAntecedente" value=fechaSeleccionada)
 
 button.btn.btn-primary.mt-4(type='button' onClick="agregarFilaAntecedentePatologico()") Agregar Antecedente Patologico
 hr

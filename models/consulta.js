@@ -17,10 +17,10 @@ export class ConsultaModel {
                                                  INNER JOIN pacientes ON pacientes.id_paciente = turnos.id_paciente
                                                  INNER JOIN personas ON pacientes.id_persona = personas.id_persona
                                                  WHERE consultas.id_paciente = ? LIMIT 1`, [id_paciente]);
-    
+
         return result.length > 0 ? result[0] : null;
     }
-    
+
 
     static async actualizarEstadoTurno(id_turno) {
         const [update] = await connection.query(`UPDATE consultas
@@ -30,13 +30,14 @@ export class ConsultaModel {
         return update;
     }
 
-    static async obtenerHistoriasClinicasPaciente(id_paciente){
+    static async obtenerHistoriasClinicasPaciente(id_paciente) {
         const [historiaClinica] = await connection.query(`SELECT consultas.fecha, 
                                                         personas.nombre, 
                                                         personas.apellido, 
                                                         historias_clinicas.motivo_consulta, 
                                                         d.descripcion_diagnosticos, 
-                                                        d.tipos_diagnosticos
+                                                        d.tipos_diagnosticos,
+                                                        profesionales.id_profesional
                                                         FROM consultas
                                                         INNER JOIN historias_clinicas ON historias_clinicas.id_paciente = consultas.id_paciente
                                                         INNER JOIN profesionales ON historias_clinicas.id_profesional = profesionales.id_profesional
@@ -51,10 +52,29 @@ export class ConsultaModel {
                                                         WHERE consultas.id_paciente = ?
                                                         GROUP BY consultas.fecha, personas.nombre, personas.apellido, historias_clinicas.motivo_consulta, 
                                                         d.descripcion_diagnosticos, d.tipos_diagnosticos;`, [id_paciente]);
-        return historiaClinica;
+
+        return historiaClinica.map(entry => {
+            const descripciones = entry.descripcion_diagnosticos ? entry.descripcion_diagnosticos.split(', ') : [];
+            const tipos = entry.tipos_diagnosticos ? entry.tipos_diagnosticos.split(', ') : [];
+
+            // Combinar las descripciones y tipos en un array de objetos
+            const diagnosticos = descripciones.map((descripcion, index) => ({
+                descripcion,
+                tipo: tipos[index] || 'No especificado'
+            }));
+
+            return {
+                id_profesional: entry.id_profesional,
+                fecha: entry.fecha,
+                nombre: entry.nombre,
+                apellido: entry.apellido,
+                motivo_consulta: entry.motivo_consulta,
+                diagnosticos
+            };
+        });
     }
 
-    static async obtenerAlergiasPaciente(id_paciente){
+    static async obtenerAlergiasPaciente(id_paciente) {
         const [alergias] = await connection.query(`SELECT alergias.nombre, alergias.fecha_desde, alergias.fecha_hasta, alergias.importancia
                                                     FROM consultas 
                                                     INNER JOIN historias_clinicas ON historias_clinicas.id_consulta = consultas.id_consulta
@@ -71,7 +91,7 @@ export class ConsultaModel {
      * @param {number} id_profesional 
      * @returns {array} Un array de objetos
      */
-    static async obtenerAntecentesPatologicosPaciente(id_paciente, id_profesional){
+    static async obtenerAntecentesPatologicosPaciente(id_paciente, id_profesional) {
         const [antecedentesPatologicos] = await connection.query(``);
         return antecedentesPatologicos;
     }
