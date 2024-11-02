@@ -83,17 +83,39 @@ export class ConsultaModel {
         return alergias;
     }
 
-    /**
-     * Quiero buscar en la base de datos los antecedentes patologicos de un determinado paciente
-     * pero estos diagnosticos seran solo del profesional que los anoto
-     * 
-     * @param {number} id_paciente 
-     * @param {number} id_profesional 
-     * @returns {array} Un array de objetos
-     */
-    static async obtenerAntecentesPatologicosPaciente(id_paciente, id_profesional) {
-        const [antecedentesPatologicos] = await connection.query(``);
-        return antecedentesPatologicos;
+    static async crearHistoriaClinica(id_paciente, id_consulta, id_profesional, motivo_consulta){
+        const [historiaClinica] = await connection.query(`INSERT INTO historias_clinicas (id_paciente, id_consulta, id_profesional, motivo_consulta)
+                                VALUES (?, ?, ?, ?)`, [id_paciente, id_consulta, id_profesional, motivo_consulta]);
+        return historiaClinica;
     }
 
+    static async guardarEvolucionesPaciente(evolucion, id_historia_clinica){
+        await connection.query(`INSERT INTO evoluciones (descripcion, id_historia_clinica)
+                                VALUES (?, ?)`, [evolucion, id_historia_clinica]);
+    }
+
+    static async guardarDiagnosticoPaciente(descripcion, tipo, id_historia_clinica){
+        await connection.query(`INSERT INTO diagnosticos (descripcion, tipo, id_historia_clinica)
+                                VALUES (?, ?, ?)`, [descripcion, tipo, id_historia_clinica]);
+    }
+
+    static async guardarAlergiasPaciente(nombre, fecha_desde, importancia, id_historia_clinica){
+        await connection.query(`INSERT INTO alergias (nombre, fecha_desde, importancia, id_historia_clinica)
+                                VALUES (?, ?, ?, ?)`, [nombre, fecha_desde, importancia, id_historia_clinica]);
+    }
+
+    static async guardarAntecedentesPatologicosPaciente(descripcion, fecha_desde, fecha_hasta, id_historia_clinica){
+        await connection.query(`INSERT INTO antecedentes_patologicos (descripcion, fecha_desde, fecha_hasta, id_historia_clinica)
+                                VALUES (?, ?, ?, ?)`, [descripcion, fecha_desde, fecha_hasta, id_historia_clinica]);
+    }
+
+    static async guardarHabitosPaciente(descripcion, fecha_desde, fecha_hasta, id_historia_clinica){
+        await connection.query(`INSERT INTO habitos (descripcion, fecha_desde, fecha_hasta, id_historia_clinica)
+                                VALUES (?, ?, ?, ?)`, [descripcion, fecha_desde, fecha_hasta, id_historia_clinica]);
+    }
+
+    static async guardarMedicamentosPaciente(nombre, dosis, frecuencia, id_historia_clinica){
+        await connection.query(`INSERT INTO medicamentos (nombre, dosis, frecuencia, id_historia_clinica)
+                                VALUES (?, ?, ?, ?)`, [nombre, dosis, frecuencia, id_historia_clinica]);
+    }
 }

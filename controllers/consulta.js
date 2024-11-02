@@ -1,6 +1,9 @@
 import { validateDatosPaciente } from '../schemas/consulta.js'
 
+let motivoConsulta = "";
+
 export class ConsultaController {
+
     constructor({ consultaModel }) {
         this.consultaModel = consultaModel;
     }
@@ -27,6 +30,8 @@ export class ConsultaController {
             const id_profesional = req.session.profesionalID;
 
             const paciente = await this.consultaModel.obtenerDatosPaciente(id_paciente);
+
+            motivoConsulta = paciente.motivo;
 
             const historiaClinica = await this.consultaModel.obtenerHistoriasClinicasPaciente(id_paciente);
 
@@ -57,7 +62,35 @@ export class ConsultaController {
                 message: 'Datos procesados correctamente',
                 data: datosValidados.data,
             });
+            
+            const id_paciente = req.session.pacienteID;
+            const id_consulta = req.session.consultaID;
+            const id_profesional = req.session.profesionalID;
+            const historiaClinica = await this.consultaModel.crearHistoriaClinica(id_paciente, id_consulta, id_profesional, motivoConsulta);
+            req.session.historiaClinicaID = historiaClinica.insertId;
+            const id_historia_clinica = req.session.historiaClinicaID;
+            
+            await this.consultaModel.guardarEvolucionesPaciente(datosValidados.data.evoluciones, id_historia_clinica);
+            
+            datosValidados.data.diagnosticos.forEach(async (diagnostico) => {
+                await this.consultaModel.guardarDiagnosticoPaciente(diagnostico.descripcion, diagnostico.tipo, id_historia_clinica);
+            });
 
+            datosValidados.data.alergias.forEach(async (alergia) => {
+                await this.consultaModel.guardarAlergiasPaciente(alergia.nombreAlergia, alergia.fechaAlergia, alergia.importanciaAlergia, id_historia_clinica);
+            }); 
+
+            datosValidados.data.antecedentesPatologicos.forEach(async (antecedente) => {
+                await this.consultaModel.guardarAntecedentesPatologicosPaciente(antecedente.descripcionAntecedente, antecedente.fechaDesde, antecedente.fechaHasta, id_historia_clinica);
+            });
+
+            datosValidados.data.habitos.forEach(async (habito) => {
+                await this.consultaModel.guardarHabitosPaciente(habito.descripcionHabito, habito.fechaDesde, habito.fechaHasta, id_historia_clinica);
+            }); 
+
+            datosValidados.data.medicamentos.forEach(async (medicamento) => {
+                await this.consultaModel.guardarMedicamentosPaciente(medicamento.nombreMedicamento, medicamento.dosisMedicamento, medicamento.frecuenciaMedicamento, id_historia_clinica);
+            }); 
 
         } catch (error) {
             console.error("Error en finalizarConsulta:", error);
