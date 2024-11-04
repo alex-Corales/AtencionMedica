@@ -3,7 +3,7 @@ document.getElementById('finalizarConsulta').addEventListener('click', function 
 
   let datosPaciente = {
     evolucion: evolucion,
-    diagnosticos: diagnosticos, 
+    diagnosticos: diagnosticos,
     alergias: alergias,
     antecedentesPatologicos: antecedentesPatologicos,
     habitos: habitos,
@@ -23,6 +23,7 @@ document.getElementById('finalizarConsulta').addEventListener('click', function 
     .then(data => {
       if (data.success) {
         alert('Atención finalizada correctamente');
+        window.location.href = '/agenda'; 
       } else {
         if (data.errors) {
           mostrarErroresDeValidacion(data.errors);
@@ -36,19 +37,20 @@ document.getElementById('finalizarConsulta').addEventListener('click', function 
       alert('Hubo un error al enviar los datos');
     });
 
-    async function mostrarErroresDeValidacion(errors) {
-      const erroresContainer = document.getElementById('erroresContainer');
-      erroresContainer.innerHTML = ''; // Limpia cualquier mensaje previo
-  
-      await errors.forEach((error) => {
-          const errorMessage = document.createElement('div');
-          errorMessage.className = 'alert alert-danger';
-          errorMessage.setAttribute('role', 'alert');
-          errorMessage.textContent = `Error en ${error.path.join('.')}: ${error.message}`;
-          erroresContainer.appendChild(errorMessage);
-      });
-  
-      erroresContainer.scrollIntoView({ behavior: 'smooth' });
+
+  async function mostrarErroresDeValidacion(errors) {
+    const erroresContainer = document.getElementById('erroresContainer');
+    erroresContainer.innerHTML = ''; // Limpia cualquier mensaje previo
+
+    await errors.forEach((error) => {
+      const errorMessage = document.createElement('div');
+      errorMessage.className = 'alert alert-danger';
+      errorMessage.setAttribute('role', 'alert');
+      errorMessage.textContent = `Error en ${error.path.join('.')}: ${error.message}`;
+      erroresContainer.appendChild(errorMessage);
+    });
+
+    erroresContainer.scrollIntoView({ behavior: 'smooth' });
   }
-  
+
 });

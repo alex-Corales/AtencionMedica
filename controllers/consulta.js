@@ -53,15 +53,7 @@ export class ConsultaController {
                     success: false,
                     errors: datosValidados.error.errors, 
                 });
-            }
-    
-            console.log("Datos validados:", datosValidados.data);
-    
-            res.status(200).json({
-                success: true,
-                message: 'Datos procesados correctamente',
-                data: datosValidados.data,
-            });
+            }    
             
             const id_paciente = req.session.pacienteID;
             const id_consulta = req.session.consultaID;
@@ -73,7 +65,7 @@ export class ConsultaController {
             await this.consultaModel.guardarEvolucionesPaciente(datosValidados.data.evoluciones, id_historia_clinica);
             
             datosValidados.data.diagnosticos.forEach(async (diagnostico) => {
-                await this.consultaModel.guardarDiagnosticoPaciente(diagnostico.descripcion, diagnostico.tipo, id_historia_clinica);
+                await this.consultaModel.guardarDiagnosticoPaciente(diagnostico.descripcion, diagnostico.estado, id_historia_clinica);
             });
 
             datosValidados.data.alergias.forEach(async (alergia) => {
@@ -91,6 +83,9 @@ export class ConsultaController {
             datosValidados.data.medicamentos.forEach(async (medicamento) => {
                 await this.consultaModel.guardarMedicamentosPaciente(medicamento.nombreMedicamento, medicamento.dosisMedicamento, medicamento.frecuenciaMedicamento, id_historia_clinica);
             }); 
+
+
+            res.status(200).json({ success: true, message: 'Consulta finalizada exitosamente' });
 
         } catch (error) {
             console.error("Error en finalizarConsulta:", error);
