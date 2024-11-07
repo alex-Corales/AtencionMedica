@@ -14,9 +14,10 @@ export class ConsultaController {
             const fecha = '2024-10-19'
             const consulta = await this.consultaModel.crearConsulta(id_paciente, id_turno, fecha);
             const id_consulta = consulta.insertId;
+            req.session.turnoID = id_turno;
             req.session.consultaID = id_consulta;
             req.session.pacienteID = id_paciente;
-            await this.consultaModel.actualizarEstadoTurno(id_turno);
+            await this.consultaModel.actualizarEstadoTurno(id_turno, 'Atendido');
             res.redirect(`/consulta?id_paciente=${id_paciente}&id_consulta=${id_consulta}`);
         } catch (error) {
             console.error(error);
@@ -90,6 +91,18 @@ export class ConsultaController {
         } catch (error) {
             console.error("Error en finalizarConsulta:", error);
             res.status(500).json({ success: false, message: 'Error al procesar la solicitud' });
+        }
+    };
+    
+    cancelarConsulta = async (req, res) => {
+        try {
+            
+            await this.consultaModel.actualizarEstadoTurno(req.session.turnoID, 'Cancelado');
+    
+            res.status(200).json({ success: true, message: 'Consulta cancelada exitosamente' });
+        } catch (error) {
+            console.error("Error en cancelarConsulta:", error);
+            res.status(500).json({ success: false, message: 'Error al cancelar la consulta' });
         }
     };
     

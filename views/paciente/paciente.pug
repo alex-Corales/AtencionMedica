@@ -48,33 +48,39 @@ html
 
         .container.mt-4
             .d-flex.justify-content-center
-                form(action="/agenda/fecha" method="POST" class="form-inline")
+                form(action="/paciente/dni" method="POST" class="form-inline")
                     .form-group.mb-2
-                        label(for="fecha" class="mr-2") Fecha:
-                        input.form-control(type="date" name="fecha" id="fecha" value=fechaSeleccionada)
-                    button.btn.btn-primary.mb-2.ml-2(type="submit") Buscar Turnos
-
+                        input.form-control(type="text" name="dni" id="dni" placeholder="Ingrese el dni del paciente")
+                    button.btn.btn-primary.mb-2.ml-2(type="submit") Buscar
+        
         .container.mt-4
             table.table.table-striped
                 thead.thead-dark
                     tr
-                        th Hora
-                        th Paciente
-                        th Motivo
-                        th Estado
-                        th Acción
+                        th Medico
+                        th Fecha Consulta
+                        th Motivo Consulta 
+                        th Diagnostico
+                        th Ver Mas
                 tbody
-                    each turno in turnos
+                    each paciente in pacientes
                         tr
-                            td #{turno.hora}
-                            td #{turno.nombre}
-                            td #{turno.motivo}
-                            td #{turno.estado}
+                            td #{paciente.nombre} #{paciente.apellido}
+                            td #{paciente.fecha.toISOString().split('T')[0]}
+                            td #{paciente.motivo_consulta}
+                            td 
+                                each diagnostico in paciente.diagnosticos
+                                    p #{diagnostico.descripcion} - #{diagnostico.tipo}
                             td
-                                if (turno.estado !== 'Atendido' && turno.estado !== 'Cancelado')
-                                    form(action="/consulta" method="POST")
-                                        input(type="hidden" name="id_paciente" value=turno.id_paciente)
-                                        input(type="hidden" name="id_turno" value=turno.id_turno)
-                                        button.btn.btn-primary(type="submit") Iniciar Consulta
+                                if paciente.id_profesional === id_profesional
+                                    form(action="/" method="POST")
+                                        input(type="hidden" name="id_historia_clinica" value=paciente.id_historia_clinica)
+                                        button.btn.btn-primary(type="submit") +
                                 else
-                                    button.btn.btn-primary(type="submit" disabled) Iniciar Consulta
+                                    button.btn.btn-primary(type="submit" disabled) +
+            strong Nota: Los detalles completos de las atenciones están restringidos a los profesionales que las registraron.  
+        
+        
+
+
+        

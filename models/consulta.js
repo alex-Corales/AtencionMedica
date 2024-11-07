@@ -22,11 +22,11 @@ export class ConsultaModel {
     }
 
 
-    static async actualizarEstadoTurno(id_turno) {
+    static async actualizarEstadoTurno(id_turno, estado) {
         const [update] = await connection.query(`UPDATE consultas
                                                 INNER JOIN turnos ON turnos.id_turno = consultas.id_turno
-                                                SET turnos.estado = "Atendido"
-                                                WHERE turnos.id_turno = ?`, [id_turno]);
+                                                SET turnos.estado = ?
+                                                WHERE turnos.id_turno = ?`, [estado, id_turno]);
         return update;
     }
 
