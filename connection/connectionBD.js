@@ -6,10 +6,14 @@ async function connectDB() {
     if (!connection) {
         try {
             const connectionConfig = {
-                host: process.env.DB_HOST || 'localhost',
+                host: 'localhost',
+                user: 'root',
+                password: '',
+                database: 'atencionMedica'
+                /*host: process.env.DB_HOST || 'localhost',
                 user: process.env.DB_USER || 'root',
                 password: process.env.DB_PASSWORD || '',
-                database: process.env.DB_NAME || 'atencionMedica'
+                database: process.env.DB_NAME || 'atencionMedica'*/
             };
 
             connection = await mysql.createConnection(connectionConfig);
