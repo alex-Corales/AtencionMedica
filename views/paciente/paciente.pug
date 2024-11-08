@@ -73,7 +73,7 @@ html
                                     p #{diagnostico.descripcion} - #{diagnostico.tipo}
                             td
                                 if paciente.id_profesional === id_profesional
-                                    form(action="/" method="POST")
+                                    form(action="/historiaClinica" method="POST")
                                         input(type="hidden" name="id_historia_clinica" value=paciente.id_historia_clinica)
                                         button.btn.btn-primary(type="submit") +
                                 else

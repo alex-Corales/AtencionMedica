@@ -11,7 +11,8 @@ export class PacienteModel {
                                                     d.tipos_diagnosticos, 
                                                     personas_profesional.nombre AS nombre_profesional, 
                                                     personas_profesional.apellido AS apellido_profesional, 
-                                                    profesionales.id_profesional
+                                                    profesionales.id_profesional,
+                                                    historias_clinicas.id_historia_clinica
                                                     FROM pacientes
                                                     INNER JOIN consultas ON consultas.id_paciente = pacientes.id_paciente
                                                     INNER JOIN personas AS personas_paciente ON personas_paciente.id_persona = pacientes.id_persona
@@ -27,7 +28,8 @@ export class PacienteModel {
                                                     ) d ON historias_clinicas.id_historia_clinica = d.id_historia_clinica
                                                     WHERE personas_paciente.documento = ?
                                                     GROUP BY consultas.fecha, 
-                                                            historias_clinicas.motivo_consulta, 
+                                                            historias_clinicas.motivo_consulta,
+                                                            historias_clinicas.id_historia_clinica, 
                                                             d.descripcion_diagnosticos, 
                                                             d.tipos_diagnosticos, 
                                                             nombre_profesional, 
@@ -47,6 +49,7 @@ export class PacienteModel {
                 nombre: entry.nombre_profesional,
                 apellido: entry.apellido_profesional,
                 motivo_consulta: entry.motivo_consulta,
+                id_historia_clinica: entry.id_historia_clinica,
                 diagnosticos
             };
         });

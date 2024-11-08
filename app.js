@@ -8,9 +8,9 @@ import { crearUsarioRouter } from './routes/usuario.js';
 import { crearAgendaRouter } from './routes/agenda.js';
 import { crearConsultaRouter } from './routes/consulta.js';
 import { crearPacienteRouter } from './routes/paciente.js';
+import { crearHistoriaClinicaRouter } from './routes/historiaClinica.js';
 
-
-export const createApp = ({ usuarioModel, agendaModel, consultaModel, profesionalModel, pacienteModel }) => {
+export const createApp = ({ usuarioModel, agendaModel, consultaModel, profesionalModel, pacienteModel, historiaClinicaModel }) => {
     const app = express();
     const PORT = process.env.PORT || 3000;
 
@@ -48,6 +48,7 @@ export const createApp = ({ usuarioModel, agendaModel, consultaModel, profesiona
     app.use('/agenda', crearAgendaRouter({ agendaModel }));
     app.use('/consulta', crearConsultaRouter({ consultaModel }));
     app.use('/paciente', crearPacienteRouter({ pacienteModel }));
+    app.use('/historiaClinica', crearHistoriaClinicaRouter({ historiaClinicaModel }));
 
     // Servidor
     app.listen(PORT, () => {

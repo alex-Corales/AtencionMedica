@@ -63,7 +63,7 @@ export class ConsultaController {
             req.session.historiaClinicaID = historiaClinica.insertId;
             const id_historia_clinica = req.session.historiaClinicaID;
             
-            await this.consultaModel.guardarEvolucionesPaciente(datosValidados.data.evoluciones, id_historia_clinica);
+            await this.consultaModel.guardarEvolucionesPaciente(datosValidados.data.evolucion, id_historia_clinica);
             
             datosValidados.data.diagnosticos.forEach(async (diagnostico) => {
                 await this.consultaModel.guardarDiagnosticoPaciente(diagnostico.descripcion, diagnostico.estado, id_historia_clinica);
