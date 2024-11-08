@@ -12,5 +12,5 @@ createApp({ usuarioModel: UsuarioModel,
             consultaModel: ConsultaModel,
             profesionalModel: ProfesionalModel,
             pacienteModel: PacienteModel,
-            HistoriaClinicaModel: HistoriaClinicaModel
+            historiaClinicaModel: HistoriaClinicaModel
          })
