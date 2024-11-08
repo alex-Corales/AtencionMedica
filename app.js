@@ -4,6 +4,9 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 import { crearUsarioRouter } from './routes/usuario.js';
 import { crearAgendaRouter } from './routes/agenda.js';
 import { crearConsultaRouter } from './routes/consulta.js';
@@ -28,11 +31,11 @@ export const createApp = ({ usuarioModel, agendaModel, consultaModel, profesiona
     app.use(express.urlencoded({ extended: true }));
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(session({
-        secret: 'secret',
+        secret: process.env.SESSION_SECRET || 'defaultSecret',
         resave: false,
         saveUninitialized: false,
-        cookie: { secure: false }  // Cambia a 'true' si usas HTTPS
-    }));
+        cookie: { secure: false } // Cambia a 'true' si usas HTTPS
+    }));    
     app.use(express.json());
 
     // Pagina principal
