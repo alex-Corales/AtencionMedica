@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon serverMySQL.js"
+    "dev": "nodemon serverMySQL.js",
+    "start": "node serverMySQL.js"
   },
   "keywords": [],
   "author": "",
