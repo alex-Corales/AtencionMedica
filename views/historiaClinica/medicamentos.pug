@@ -1,0 +1,18 @@
+.accordion-item
+    h2.accordion-header
+      button.accordion-button.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#panelsStayOpen-collapseSix' aria-expanded='false' aria-controls='panelsStayOpen-collapseSix')
+        | Medicamentos
+    #panelsStayOpen-collapseSix.accordion-collapse.collapse
+      .accordion-body
+        table.table.table.sm
+          thead
+            tr
+              td(scope='col') Nombre
+              td(scope='col') Dosis 
+              td(scope='col') Frecuencia 
+          tbody
+            tr 
+              each medicamento in medicamentos
+                th #{medicamento.nombre}
+                th #{medicamento.dosis}
+                th #{medicamento.frecuencia}

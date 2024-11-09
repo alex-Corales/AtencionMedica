@@ -1,0 +1,18 @@
+.accordion-item
+    h2.accordion-header
+      button.accordion-button.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#panelsStayOpen-collapseFive' aria-expanded='false' aria-controls='panelsStayOpen-collapseFive')
+        | Habitos
+    #panelsStayOpen-collapseFive.accordion-collapse.collapse
+      .accordion-body
+        table.table.table.sm 
+          thead
+            tr 
+              th(scope='col') Descripcion 
+              th(scope='col') Fecha desde 
+              th(scope='col') Fecha hasta 
+          tbody 
+            tr 
+              each habito in habitos 
+                td #{habito.descripcion}
+                td #{habito.fecha_desde}
+                td #{habito.fecha_hasta}

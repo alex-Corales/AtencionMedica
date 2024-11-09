@@ -1,0 +1,16 @@
+.accordion-item
+    h2.accordion-header
+      button.accordion-button.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#panelsStayOpen-collapseTwo' aria-expanded='false' aria-controls='panelsStayOpen-collapseTwo')
+        | Diagnosticos
+    #panelsStayOpen-collapseTwo.accordion-collapse.collapse
+      .accordion-body
+        table.table.table.sm 
+          thead
+            tr 
+              th(scope='col') Descripcion
+              th(scope='col') Estado (Tipo)
+          tbody
+            tr 
+              each diagnostico in diagnosticos
+                td #{diagnostico.descripcion}
+                td #{diagnostico.tipo}

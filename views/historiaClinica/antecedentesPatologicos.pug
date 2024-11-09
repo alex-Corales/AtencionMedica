@@ -1,0 +1,18 @@
+.accordion-item
+    h2.accordion-header
+      button.accordion-button.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#panelsStayOpen-collapseFour' aria-expanded='false' aria-controls='panelsStayOpen-collapseFour')
+        | Antecedentes Patologicos
+    #panelsStayOpen-collapseFour.accordion-collapse.collapse
+      .accordion-body
+        table.table.table.sm
+          thead
+            tr 
+              th(scope='col') Descripcion 
+              th(scope='col') Fecha desde 
+              th(scope='col') Fecha hasta
+          tbody
+            tr
+              each antecedente in antecedentes
+                td #{antecedente.descripcion}
+                td #{antecedente.fecha_desde}
+                td #{antecedente.fecha_hasta}

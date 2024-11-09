@@ -19,7 +19,7 @@ export class HistoriaClinicaModel {
                                                     FROM historias_clinicas
                                                     INNER JOIN evoluciones ON evoluciones.id_historia_clinica = historias_clinicas.id_historia_clinica
                                                     WHERE historias_clinicas.id_historia_clinica = ?`, [id_historia_clinica]);
-        return evolucion;
+        return evolucion.length > 0 ? evolucion[0] : null;
     }
 
     static async obtenerDiagnosticoPorIDHistoriaClinica(id_historia_clinica) {
