@@ -11,12 +11,16 @@ table.table.table-sm(id="tablaAlergias")
 h5.mt-4 Agregar una nueva alergia
 .row
   .col 
-    input.form-control(type='text' id='inputNombreAlergia' placeholder='Ingrese el nombre' aria-label='Nombre')
+    //- Cambié el input de texto a un select para las alergias
+    select.form-select(id='selectNombreAlergia' aria-label='Nombre de Alergia')
+      option(value='' selected) Seleccione una alergia
+      each item in alergiasJson
+        option(value=item.nombreCodigo) #{item.nombreCodigo}
   .col
     input.form-control(type="date" name="fecha" id="fechaAlergia" value=fechaSeleccionada)
   .col
     select.form-select(id='selectImportancia' aria-label='Importancia')
-      option(value='' selected) Importacia
+      option(value='' selected) Importancia
       option(value='Leve') Leve
       option(value='Normal') Normal
       option(value='Alta') Alta

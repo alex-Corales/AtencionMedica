@@ -14,9 +14,9 @@ export const crearPacienteRouter = ({ pacienteModel }) => {
 
         const pacientes = await pacienteModel.obtenerPacientePorId(id_paciente);
 
-        console.log(id_paciente);
+        const id_profesional = req.session.profesionalID;
 
-        res.render('paciente/pacienteAgenda', { pacientes });
+        res.render('paciente/pacienteAgenda', { pacientes, id_profesional });
     })
 
     return pacienteRouter;

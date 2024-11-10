@@ -26,6 +26,8 @@ document.addEventListener('DOMContentLoaded', function () {
       medicamentos: medicamentos
     };
 
+    console.log(datosPaciente);
+
     const options = {
       method: 'POST',
       headers: {

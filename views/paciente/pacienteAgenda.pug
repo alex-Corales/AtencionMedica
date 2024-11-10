@@ -49,7 +49,6 @@ html
             table.table.table-striped
                 thead.thead-dark
                     tr
-                        th Medico
                         th Fecha Consulta
                         th Motivo Consulta 
                         th Diagnostico
@@ -57,7 +56,6 @@ html
                 tbody
                     each paciente in pacientes
                         tr
-                            td #{paciente.nombre} #{paciente.apellido}
                             td #{paciente.fecha.toISOString().split('T')[0]}
                             td #{paciente.motivo_consulta}
                             td 

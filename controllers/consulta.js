@@ -1,9 +1,19 @@
+import fs from 'fs/promises';
 import { validateDatosPaciente } from '../schemas/consulta.js'
 
 let motivoConsulta = "";
 
-export class ConsultaController {
+const cargarAlergiasJson = async () => {
+    try {
+        const data = await fs.readFile('alergias.json', 'utf8');
+        return JSON.parse(data);
+    } catch (error) {
+        console.error('Error al cargar el archivo JSON:', error);
+        return [];
+    }
+};
 
+export class ConsultaController {
     constructor({ consultaModel }) {
         this.consultaModel = consultaModel;
     }
@@ -29,21 +39,28 @@ export class ConsultaController {
         try {
             const { id_paciente, id_consulta } = req.query;
             const id_profesional = req.session.profesionalID;
-
+    
+            // Obtiene los datos del paciente
             const paciente = await this.consultaModel.obtenerDatosPaciente(id_paciente);
-
+    
             motivoConsulta = paciente.motivo;
-
+    
+            // Obtiene la historia clínica del paciente
             const historiaClinica = await this.consultaModel.obtenerHistoriasClinicasPaciente(id_paciente);
-
+    
+            // Obtiene las alergias del paciente
             const alergias = await this.consultaModel.obtenerAlergiasPaciente(id_paciente);
-
-            res.render('consulta/consulta', { paciente, historiaClinica, id_profesional, alergias });
+    
+            // Carga las alergias JSON
+            const alergiasJson = await cargarAlergiasJson();
+    
+            // Renderiza la vista con todos los datos, incluyendo el JSON de alergias
+            res.render('consulta/consulta', { paciente, historiaClinica, id_profesional, alergias, alergiasJson });
         } catch (error) {
             console.error(error);
             res.status(500).send('Error al mostrar datos de la consulta');
         }
-    }
+    };
 
     finalizarConsulta = async (req, res) => {
         try {
