@@ -14,5 +14,5 @@
             tr
               each antecedente in antecedentes
                 td #{antecedente.descripcion}
-                td #{antecedente.fecha_desde}
-                td #{antecedente.fecha_hasta}
+                td #{antecedente.fecha_desde.toISOString().split('T')[0]}
+                td #{antecedente.fecha_hasta.toISOString().split('T')[0]}

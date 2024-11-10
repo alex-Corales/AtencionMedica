@@ -9,12 +9,12 @@
             tr
               th(scope='col') Nombre 
               th(scope='col') Fecha desde 
-              th(scope='col') Fecha hasta 
+              // th(scope='col') Fecha hasta 
               th(scope='col') Importacia
           tbody
             tr
               each alergia in alergias 
                 td #{alergia.nombre}
-                td #{alergia.fecha_desde}
-                td #{alergia.fecha_hasta}
+                td #{alergia.fecha_desde.toISOString().split('T')[0]}
+                // td #{alergia.fecha_hasta.toISOString().split('T')[0]}
                 td #{alergia.importancia}

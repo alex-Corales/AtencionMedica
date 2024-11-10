@@ -14,5 +14,5 @@
             tr 
               each habito in habitos 
                 td #{habito.descripcion}
-                td #{habito.fecha_desde}
-                td #{habito.fecha_hasta}
+                td #{habito.fecha_desde.toISOString().split('T')[0]}
+                td #{habito.fecha_hasta.toISOString().split('T')[0]}
