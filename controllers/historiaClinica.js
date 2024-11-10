@@ -1,5 +1,3 @@
-import striptags from 'striptags';
-
 export class HistoriaClinicaController {
     constructor({ historiaClinicaModel }) {
         this.historiaClinicaModel = historiaClinicaModel;

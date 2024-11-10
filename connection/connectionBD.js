@@ -1,25 +1,28 @@
 import mysql from 'mysql2/promise';
 
-let connection;
+let pool;
 
-async function connectDB() {
-    if (!connection) {
+function connectDB() {
+    if (!pool) {
         try {
-            const connectionConfig = {
+            const poolConfig = {
                 host: process.env.DB_HOST || 'localhost',
                 user: process.env.DB_USER || 'root',
                 password: process.env.DB_PASSWORD || '',
-                database: process.env.DB_NAME || 'atencionMedica'
+                database: process.env.DB_NAME || 'atencionMedica',
+                waitForConnections: true,
+                connectionLimit: 5, // Límite de conexiones
+                queueLimit: 0
             };
 
-            connection = await mysql.createConnection(connectionConfig);
-            console.log('Conectado a la base de datos');
+            pool = mysql.createPool(poolConfig);
+            console.log('Pool de conexiones creado');
         } catch (err) {
-            console.log('Error al conectar a la base de datos:', err);
-            throw err; // Lanza un error si no se puede conectar
+            console.log('Error al crear el pool de conexiones:', err);
+            throw err; // Lanza un error si no se puede crear el pool
         }
     }
-    return connection;
+    return pool;
 }
 
 export default connectDB;
