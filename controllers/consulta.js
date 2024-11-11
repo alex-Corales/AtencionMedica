@@ -40,15 +40,13 @@ export class ConsultaController {
         try {
             const { id_paciente, id_consulta } = req.query;
             const id_turno = req.session.turnoID;
-
+    
             console.log(id_paciente, id_turno);
             const id_profesional = req.session.profesionalID;
     
             // Obtiene los datos del paciente
             const paciente = await this.consultaModel.obtenerDatosPaciente(id_paciente, id_turno);
-    
             motivoConsulta = paciente.motivo;
-            
     
             // Obtiene la historia clínica del paciente
             const historiaClinica = await this.consultaModel.obtenerHistoriasClinicasPaciente(id_paciente);
@@ -59,13 +57,17 @@ export class ConsultaController {
             // Carga las alergias JSON
             const alergiasJson = await cargarAlergiasJson();
     
-            // Renderiza la vista con todos los datos, incluyendo el JSON de alergias
-            res.render('consulta/consulta', { paciente, historiaClinica, id_profesional, alergias, alergiasJson });
+            // Obtiene las plantillas médicas
+            const plantillas = await this.consultaModel.obtenerPlantillas();
+    
+            // Renderiza la vista con todos los datos, incluyendo las plantillas
+            res.render('consulta/consulta', { paciente, historiaClinica, id_profesional, alergias, alergiasJson, plantillas });
         } catch (error) {
             console.error(error);
             res.status(500).send('Error al mostrar datos de la consulta');
         }
     };
+    
 
     finalizarConsulta = async (req, res) => {
         try {

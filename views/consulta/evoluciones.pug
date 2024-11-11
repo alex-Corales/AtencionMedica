@@ -1,5 +1,9 @@
 h4.mt-4 Evoluciones de la Atención Actual
 .mb-3
-  #idEvoluciones(style='height: 200px;')
-hr
+  select.form-select.mb-4.mt-4(id='selectPlantilla' aria-label='Estado' onchange='mostrarPlantilla()')
+    option(value='') Seleccione una plantilla
+    each plantilla in plantillas
+      option(value=plantilla.contenido)= plantilla.nombre
 
+  #idEvoluciones(style='height: 200px; border: 1px solid #ccc; padding: 10px; overflow-y: auto;')
+hr

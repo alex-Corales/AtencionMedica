@@ -221,4 +221,30 @@ export class ConsultaModel {
             connection.release();
         }
     }
+
+    static async obtenerPlantillas() {
+        const pool = connectDB();
+        const connection = await pool.getConnection();
+        try {
+            const [plantillas] = await connection.query(
+                `SELECT id, nombre, contenido, fecha_creacion FROM plantillas`
+            );
+            return plantillas;
+        } finally {
+            connection.release();
+        }
+    }
+    static async obtenerPlantillas() {
+        const pool = connectDB();
+        const connection = await pool.getConnection();
+        try {
+            const [plantillas] = await connection.query(
+                `SELECT id, nombre, contenido, fecha_creacion FROM plantillas`
+            );
+            return plantillas;
+        } finally {
+            connection.release();
+        }
+    }
+        
 }

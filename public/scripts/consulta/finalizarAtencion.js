@@ -13,10 +13,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
+  // Función para mostrar la plantilla seleccionada
+  function mostrarPlantilla() {
+    const select = document.getElementById('selectPlantilla');
+    const contenidoPlantilla = select.value; // Obtiene el contenido de la plantilla seleccionada
+
+    // Usa Quill para insertar el contenido de la plantilla
+    quill.root.innerHTML = contenidoPlantilla;
+  }
+
+  // Asigna el evento 'change' al <select>
+  const selectElement = document.getElementById('selectPlantilla');
+  if (selectElement) {
+    selectElement.addEventListener('change', mostrarPlantilla);
+  }
+
   document.getElementById('finalizarConsulta').addEventListener('click', function () {
-    
     let evolucion = quill.root.innerHTML;
-    
+
     let datosPaciente = {
       evolucion: evolucion,
       diagnosticos: diagnosticos,
@@ -41,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(data => {
         if (data.success) {
           alert('Atención finalizada correctamente');
-          window.location.href = '/agenda'; 
+          window.location.href = '/agenda';
         } else {
           if (data.errors) {
             mostrarErroresDeValidacion(data.errors);
