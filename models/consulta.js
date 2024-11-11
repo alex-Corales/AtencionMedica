@@ -16,7 +16,7 @@ export class ConsultaModel {
         }
     }
 
-    static async obtenerDatosPaciente(id_paciente) {
+    static async obtenerDatosPaciente(id_paciente, id_turno) {
         const pool = connectDB();
         const connection = await pool.getConnection();
         try {
@@ -26,8 +26,8 @@ export class ConsultaModel {
                  INNER JOIN turnos ON consultas.id_turno = turnos.id_turno
                  INNER JOIN pacientes ON pacientes.id_paciente = turnos.id_paciente
                  INNER JOIN personas ON pacientes.id_persona = personas.id_persona
-                 WHERE consultas.id_paciente = ? LIMIT 1`, 
-                [id_paciente]
+                 WHERE consultas.id_paciente = ? AND  turnos.id_turno = ? LIMIT 1`, 
+                [id_paciente, id_turno]
             );
             return result.length > 0 ? result[0] : null;
         } finally {
@@ -57,7 +57,8 @@ export class ConsultaModel {
         const connection = await pool.getConnection();
         try {
             const [historiaClinica] = await connection.query(
-                `SELECT consultas.fecha, 
+                `SELECT historias_clinicas.id_historia_clinica,
+                        consultas.fecha, 
                         personas.nombre, 
                         personas.apellido, 
                         historias_clinicas.motivo_consulta, 

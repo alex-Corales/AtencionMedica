@@ -39,12 +39,16 @@ export class ConsultaController {
     mostrarDatosConsulta = async (req, res) => {
         try {
             const { id_paciente, id_consulta } = req.query;
+            const id_turno = req.session.turnoID;
+
+            console.log(id_paciente, id_turno);
             const id_profesional = req.session.profesionalID;
     
             // Obtiene los datos del paciente
-            const paciente = await this.consultaModel.obtenerDatosPaciente(id_paciente);
+            const paciente = await this.consultaModel.obtenerDatosPaciente(id_paciente, id_turno);
     
             motivoConsulta = paciente.motivo;
+            
     
             // Obtiene la historia clínica del paciente
             const historiaClinica = await this.consultaModel.obtenerHistoriasClinicasPaciente(id_paciente);
