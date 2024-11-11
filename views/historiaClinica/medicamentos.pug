@@ -7,12 +7,12 @@
         table.table.table.sm
           thead
             tr
-              td(scope='col') Nombre
-              td(scope='col') Dosis 
-              td(scope='col') Frecuencia 
+              th(scope='col') Nombre
+              th(scope='col') Dosis 
+              th(scope='col') Frecuencia 
           tbody
             tr 
               each medicamento in medicamentos
-                th #{medicamento.nombre}
-                th #{medicamento.dosis}
-                th #{medicamento.frecuencia}
+                td #{medicamento.nombre}
+                td #{medicamento.dosis}
+                td #{medicamento.frecuencia}
