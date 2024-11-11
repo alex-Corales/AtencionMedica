@@ -21,7 +21,8 @@ export class ConsultaController {
     crearConsulta = async (req, res) => {
         try {
             const { id_paciente, id_turno } = req.body;
-            const fecha = '2024-10-19'
+            const hoy = new Date();
+            const fecha = hoy.toISOString().split('T')[0]; 
             const consulta = await this.consultaModel.crearConsulta(id_paciente, id_turno, fecha);
             const id_consulta = consulta.insertId;
             req.session.turnoID = id_turno;
