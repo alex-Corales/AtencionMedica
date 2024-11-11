@@ -39,9 +39,11 @@
 
 - Medico 1: 
   ```
-   doctor1@gmail.com -- admin
+   mail: doctor1@gmail.com 
+   contraseña: admin
    ```
 - Medico 2:
    ```
-   doctor2@gmail.com -- admin
+   mail: doctor2@gmail.com
+   contraseña: admin
    ```
